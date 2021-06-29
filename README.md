@@ -1,4 +1,4 @@
-## Hello 小老弟，终于等到你啦~ 
+## Hey , buddy , you finally got me ! 
 
 If u want to know,u can use the [baidu](https://www.baidu.com/) to find ur information.
 
