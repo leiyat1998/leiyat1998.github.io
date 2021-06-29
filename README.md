@@ -2,8 +2,7 @@
 
 If u want to know,u can use the [baidu](https://www.baidu.com/) to find ur information.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
+If u want to lean about me,u can read the following.I believe that, the more u know, the more u love.
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
@@ -34,4 +33,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 ### Recomend
 
-If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/) And recomend that when you meet some trouble u can visit bilibili to find video.
+If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/). And recomend that when you meet some trouble u can visit [bilibili](http://bilibili.com/)) to find video.
