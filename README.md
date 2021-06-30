@@ -1,36 +1,21 @@
-## Hey , buddy , you finally got me ! 
+## Hey , buddy ,this is leiyat, you finally got me ! 
 
-If u want to know,u can use the [baidu](https://www.baidu.com/) to find ur information.
+If u want to lean about me,u can read the following.
 
-If u want to lean about me,u can read the following.I believe that, the more u know, the more u love.
-### Markdown
+I believe that, the more u know, the more u love.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Websit guide
 
-```markdown
-Syntax highlighted code block
+1.[baidu](https://www.baidu.com/)          find u want
+2.[163](http://mail.163.com/)          log into Gmail
+3.[library](http://library.suda.edu.cn/)          Soochow university library(login the vpn first)
+4.[graduate student network](http://yjsy.hrbmu.edu.cn/)          Harbin Medical University
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+### My blogs
 
-1. Numbered
-2. List
+Looking the following~
 
-**Bold** and _Italic_ and `Code` text
+### Recommend
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/leiyat1998/leiyat1998.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Recomend
-
-If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/). And recomend that when you meet some trouble u can visit [bilibili](http://bilibili.com/)) to find video.
+If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/). And recommend that when you meet some trouble u can visit [bilibili](http://bilibili.com/)) to find video.
