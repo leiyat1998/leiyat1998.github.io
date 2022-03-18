@@ -35,7 +35,7 @@ Error in continuous_scale(aesthetics, "gradient", seq_gradient_pal(low,  :
 #  aesthetics = "fill"
 #)
 
-#finally，its spelling mistake
+#finally，it's spelling mistake
 x <- p+geom_tile()+
   scale_fill_gradient2(low=muted("#1a0efb"),mid="white",high=muted("#fb120e"),midpoint = 0,
                       space = "Lab",na.value = "grey50",guide = "colourbar",aesthetics = "fill")+
