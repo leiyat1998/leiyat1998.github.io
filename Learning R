@@ -1,0 +1,52 @@
+#This file just records the code I used in learning R
+
+#clearing up assignment
+rm(list=ls())
+
+#read excel
+library(readxl)
+xlse_all <- read_excel("E:\\about study\\S\\Rtest\\ours\\different.xlsx")#your file's path
+
+#sort by one of the values in table
+library(dplyr)
+xlse_rt <- arrange(xlse_all,xlse_all[,3],)#third col inreverse order
+xlse_rt
+
+#ggplot heatmap
+p <- ggplot(data =xlse_rt,mapping=aes(x=group,y=Gene_name) )
+x <- p+geom_tile(alpha=0.5,aes(fill=source))+
+  scale_fill_gradient(low="white",hight="red")+
+  theme(axis.text.x = element_text(angle = 20,vjust=0,size=10),
+        axis.title.y = element_text(size=10),
+        plot.title = element_text(hjust=0.5,size=5,lineheight = 1))
+       
+Error in continuous_scale(aesthetics, "gradient", seq_gradient_pal(low,  : 
+  unused argument (hight = "red")
+        
+?scale_fill_gradient
+
+#scale_fill_gradient(
+  ...,
+  low = "#132B43",
+  high = "#56B1F7",
+  space = "Lab",
+  na.value = "grey50",
+  guide = "colourbar",
+  aesthetics = "fill"
+)
+
+#finally，its spelling mistake
+x <- p+geom_tile()+
+  scale_fill_gradient2(low=muted("#1a0efb"),mid="white",high=muted("#fb120e"),midpoint = 0,
+                      space = "Lab",na.value = "grey50",guide = "colourbar",aesthetics = "fill")+
+  theme(axis.text.x = element_text(angle = 20,vjust=0,size=10),#angle=0 is horizin
+        axis.title.y = element_text(size=10),
+        plot.title = element_text(hjust=0.5,size=5,lineheight = 1))
+
+x
+
+#save as png
+getwd()
+save(x,file = "ggpot2.rdata")
+load("ggpot2.rdata")
+ggsave("ggpot2.png",width = 5,height = 15)
