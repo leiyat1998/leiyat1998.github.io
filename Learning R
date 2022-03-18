@@ -26,14 +26,14 @@ Error in continuous_scale(aesthetics, "gradient", seq_gradient_pal(low,  :
 ?scale_fill_gradient
 
 #scale_fill_gradient(
-  ...,
-  low = "#132B43",
-  high = "#56B1F7",
-  space = "Lab",
-  na.value = "grey50",
-  guide = "colourbar",
-  aesthetics = "fill"
-)
+#  ...,
+#  low = "#132B43",
+#  high = "#56B1F7",
+#  space = "Lab",
+#  na.value = "grey50",
+#  guide = "colourbar",
+#  aesthetics = "fill"
+#)
 
 #finally，its spelling mistake
 x <- p+geom_tile()+
