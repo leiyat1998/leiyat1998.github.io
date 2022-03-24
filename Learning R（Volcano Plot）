@@ -1,0 +1,48 @@
+#clearing up assignment
+rm(list=ls())
+
+library(readxl)
+xlse_lung <- read_excel("E:\\about study\\S\\Rtest\\Acr_mice\\lung.xlsx")
+xlse_lung
+
+#assignment
+cut_off_p <- 0.05
+cut_off_log <- 1
+
+#Sets the color range of the center point in the image
+xlse_lung$change <- ifelse(xlse_lung$P.Value<cut_off_p&abs(xlse_lung$logFC)>=cut_off_log,
+                           ifelse(xlse_lung$logFC>cut_off_log,"Up","Down"),"Stable")
+xlse_lung$change
+
+#Map the volcano
+library(ggplot2)
+library(scales)
+p <- ggplot(data =xlse_lung,aes(x=logFC,y=-1*log10(P.Value),color=change))+
+  geom_point(alpha=0.4,size=3.5)+
+  scale_color_manual(values = c("#1a0efb","#d2dae2","#fb120e"))+
+#Auxiliary line
+geom_vline(xintercept = c(1,-1),lty=4,col="black",lwd=0.8)+
+  geom_hline(yintercept = -log10(cut_off_p),lty=4,col="black",lwd=0.8)+
+#coordinate
+  labs(x="log2(FC)",
+       y="-log10(p_value)")+
+  theme_bw()+
+theme(plot.title = element_text(hjust = 0.5),
+      legend.position = "right",
+      legend.title=element_blank())
+
+p
+
+
+#Insert the label
+xlse_lung$label <- ifelse(xlse_lung$P.Value<cut_off_p&abs(xlse_lung$logFC)>=2.5,as.character(xlse_lung$GENE_SYMBOL),"")
+
+
+library(ggrepel)
+q <- p+geom_text_repel(data=xlse_lung,aes(x=xlse_lung$logFC,y=-log10(xlse_lung$P.Value),label=label),
+                  size=3,box.padding = unit(0.5,"lines"),
+                  point.padding = unit(0.8,"lines"),
+                  segment.color="black",
+                  show.legend = FALSE)
+
+q
