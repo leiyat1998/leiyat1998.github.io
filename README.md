@@ -1,18 +1,29 @@
-## Hey , buddy ,this is leiyat, you finally got me ! 
+# Hey , buddy ,this is leiyat, you finally got me ! 
 
 If u want to lean about me,u can read the following.
 
 I believe that, the more u know, the more u love.
 
-### Websit guide
+## Here I use to record my learning process
 
-1.[baidu](https://www.baidu.com/)          find u want
+U can follow my lead，or you can just find what you want
 
-2.[163](http://mail.163.com/)          log into Gmail
+## Websit guide
 
-3.[library](http://library.suda.edu.cn/)          Soochow university library(login the vpn first)
+1.[baidu](https://www.baidu.com/)                                                                                    find u want
 
-4.[graduate student network](http://yjsy.hrbmu.edu.cn/)          Harbin Medical University
+2.[163](http://mail.163.com/)                                                                                        log into Gmail
+
+3.[library](http://library.suda.edu.cn/)                                                                             Soochow university library(login the vpn first)
+
+4.[graduate student network](http://yjsy.hrbmu.edu.cn/)                                                              Harbin Medical University
+
+5.[ConnectivityMap](https://clue.io/)                                                                                Look for drugs or similar expressions
+
+6.[PubMed](https://pubmed.ncbi.nlm.nih.gov/)                                                                         Search literature
+
+7.[TCGA](https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga)                        Cancer database
+tips:u can go here to Check TCGA cancer in Chinese and English.(https://www.jianshu.com/p/3c0f74e85825)
 
 
 ### My blogs
