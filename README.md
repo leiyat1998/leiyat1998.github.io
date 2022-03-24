@@ -23,7 +23,7 @@ U can follow my lead，or u can just find what u want
 6.[PubMed](https://pubmed.ncbi.nlm.nih.gov/)                                                                         Search literature
 
 7.[TCGA](https://www.cancer.gov/about-nci/organization/ccg/research/structural-genomics/tcga)                        Cancer database
-tips:u can go [here](https://www.jianshu.com/p/3c0f74e85825) to Check TCGA cancer in Chinese and English.
+(tips:u can go [here](https://www.jianshu.com/p/3c0f74e85825) to Check TCGA cancer in Chinese and English.)
 
 
 ### My blogs
