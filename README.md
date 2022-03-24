@@ -32,4 +32,4 @@ Looking the following~
 
 ### Recommend
 
-If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/). And recommend that when you meet some trouble u can visit [bilibili](http://bilibili.com/)) to find video.
+If u want to build ur own websit ,u can click here [Github](https://github.com/) and download an app ,click here [Gridea](https://https://gridea.dev/). And recommend that when you meet some trouble u can visit [bilibili](http://bilibili.com/) to find video.
