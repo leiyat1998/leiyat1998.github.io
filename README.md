@@ -15,6 +15,9 @@ I believe that, the more u know, the more u love.
 4.[graduate student network](http://yjsy.hrbmu.edu.cn/)          Harbin Medical University
 
 
+
+###If u want to learn R in chinese,[check here](https://github.com/leiyat1998/leiyat1998.github.io/tree/R/R)
+
 ### My blogs
 
 Looking the following~
