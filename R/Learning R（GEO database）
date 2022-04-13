@@ -1,0 +1,46 @@
+#GEO数据
+
+
+library(GEOquery)
+f <- "GSE125851_eSet.Rdata"
+
+if(!file.exists(f)){
+eSet <- getGEO('GSE125851',
+              destdir = ".",
+               AnnotGPL = F,#注释文件
+               getGPL = F)#平台文件
+save(eSet,file = f)
+}
+
+#数据提取
+load("GSE125851_eSet.Rdata")
+length(eSet)#查看对象个数
+ob=eSet[[1]]#取第一个对象
+exprSet=exprs(ob)#得到表达矩阵
+class(eSet[[1]])
+samples=sampleNames(ob)#样本信息
+pd1 <- pData(eSet[[1]])#样本具体信息/临床信息
+##打开表格查看数字大小，一般是已经log的数据，未log的数据为成百上千，若为此，需自行log
+
+#脚本自动判断是否需要log转换
+##若没有，会自动转换并显示log2 transform finished，并输出exprSet（已log）
+##若是已转换的，则会显示log2 transform not needed
+ex <- exprSet
+qx <- as.numeric(quantile(ex,c(0.,0.25,0.5,0.75,0.99,1.0),na.rm = T))
+logc <- (qx[5]>100)||
+  (qx[6]-qx[1]>50&&qx[4]>1&&qx[4]<2)
+
+if(logc){ex[which(ex<=0)] <- NaN
+  exprSet <- log2(ex)
+  print("log2 transform finished")}else{print("log2 transform not needed")}
+  }
+  
+#分组
+group_list1 <- ifelse(pd1$source_name_ch1=="Mouse liver_Control","control_liver",
+                      ifelse(pd1$source_name_ch1=="Mouse liver_Acrylamide treated","treat_liver",
+                            ifelse(pd1$source_name_ch1=="Mouse lung_Control","control_lung","treat_lung")      
+                             )
+                      )
+table(group_list1)#查看每个组的具体情况
+  
+  
