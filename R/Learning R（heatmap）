@@ -1,18 +1,18 @@
-#This file just records the code I used in learning R
+#这个文档主要是用来记录我学习R的过程
 
-#clearing up assignment
+#清除赋值
 rm(list=ls())
 
-#read excel
+#读入xlse
 library(readxl)
 xlse_all <- read_excel("E:\\about study\\S\\Rtest\\ours\\different.xlsx")#your file's path
 
-#sort by one of the values in table
+#按表中的值排序
 library(dplyr)
-xlse_rt <- arrange(xlse_all,xlse_all[,3],)#third col inreverse order
+xlse_rt <- arrange(xlse_all,xlse_all[,3],)
 xlse_rt
 
-#ggplot heatmap
+#ggplot画热图
 p <- ggplot(data =xlse_rt,mapping=aes(x=group,y=Gene_name) )
 x <- p+geom_tile(alpha=0.5,aes(fill=source))+
   scale_fill_gradient(low="white",hight="red")+
@@ -35,7 +35,7 @@ Error in continuous_scale(aesthetics, "gradient", seq_gradient_pal(low,  :
 #  aesthetics = "fill"
 #)
 
-#finally，its spelling mistake
+#啊，是拼写错误
 x <- p+geom_tile()+
   scale_fill_gradient2(low=muted("#1a0efb"),mid="white",high=muted("#fb120e"),midpoint = 0,
                       space = "Lab",na.value = "grey50",guide = "colourbar",aesthetics = "fill")+
@@ -45,7 +45,7 @@ x <- p+geom_tile()+
 
 x
 
-#save as png
+#保存图片为png
 getwd()
 save(x,file = "ggpot2.rdata")
 load("ggpot2.rdata")
