@@ -1,0 +1,69 @@
+#GO/KEGG富集分析
+
+##ID转换
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(DOSE)
+library(topGO)
+library(pathview)
+library(readxl)
+library(ggplot2)
+
+###查看能转换的类型
+keytypes(org.Hs.eg.db)
+
+###文件读入
+data_gene <- read_excel("E:\\about study\\S\\R\\Rtest\\ours\\gene.xlsx")
+data_gene$name <- as.character(data_gene$Gene_name)#需要character格式再进行ID转换
+
+###背景基因集
+data(geneList, package="DOSE") #富集分析的背景基因集
+gene <- names(geneList)[abs(geneList) > 2]
+gene.df <- bitr(gene, fromType = "ENTREZID", toType = c("ENSEMBL", "SYMBOL"), OrgDb = org.Hs.eg.db)
+head(gene.df,2)
+
+###将symbol转换为ensembl和enterzid格式
+test1=bitr(data_gene$name,fromType="SYMBOL",toType=c("ENSEMBL","ENTREZID"), OrgDb="org.Hs.eg.db")#不用在意提示
+head(test1,2)#查看前两列的转换
+
+
+#GO分析（部分）
+##groupGO富集分析
+ggo <- groupGO(gene = test1$ENTREZID,OrgDb = org.Hs.eg.db, ont = "CC",level = 3,readable = TRUE)
+
+
+##enrichGO 富集分析，用于最后查看具体通路和基因的部分
+ego <- enrichGO(gene = test1$ENTREZID,
+                universe = names(geneList),#背景基因集
+                OrgDb = org.Hs.eg.db,
+                ont = "ALL",
+                pAdjustMethod = "BH", #矫正方式
+                pvalueCutoff = 1, #P值会过滤掉很多，可以全部输出
+                qvalueCutoff = 1,
+                readable = TRUE) #Gene ID 转成gene Symbol ，易读
+head(ego,2)
+
+##setReadable函数转换
+ego_mf <- enrichGO(gene = test1$ENTREZID,
+                   universe = names(geneList),
+                   OrgDb = org.Hs.eg.db,
+                   ont = "MF",
+                   pAdjustMethod = "BH",
+                   pvalueCutoff = 1,
+                   qvalueCutoff = 1,
+                   readable = FALSE)
+
+##输出结果
+###点图
+dotplot(ego_mf,title="EnrichmentGO_MF_dot")#富集的数按大到小排序
+
+###条形图
+go_p <- barplot(ego_mf, showCategory=20,title="EnrichmentGO_MF")
+save(go_p,file = "go.rdata")
+load("go.rdata")
+ggsave("go.png",width = 8,height = 8)
+getwd()
+
+
+##查看具体通路和基因
+write.csv(ego@result,"key_gene_GO.csv",quote = F)
