@@ -47,7 +47,7 @@ head(ego,2)
 ego_mf <- enrichGO(gene = test1$ENTREZID,
                    universe = names(geneList),
                    OrgDb = org.Hs.eg.db,
-                   ont = "MF",
+                   ont = "MF",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
                    pAdjustMethod = "BH",
                    pvalueCutoff = 1,
                    qvalueCutoff = 1,
