@@ -2,8 +2,14 @@
 
 ##ID转换
 library(clusterProfiler)
+library(AnnotationDbi)
+library(stats4)
+library(BiocGenerics)
 library(org.Hs.eg.db)
 library(DOSE)
+library(graph)
+library(GO.db)
+library(SparseM)
 library(topGO)
 library(pathview)
 library(readxl)
@@ -34,7 +40,7 @@ ggo <- groupGO(gene = test1$ENTREZID,OrgDb = org.Hs.eg.db, ont = "CC",level = 3,
 
 ##enrichGO 富集分析，用于最后查看具体通路和基因的部分
 ego <- enrichGO(gene = test1$ENTREZID,
-                universe = names(geneList),#背景基因集
+                universe = names(geneList),#背景基因集，可以不要
                 OrgDb = org.Hs.eg.db,
                 ont = "all",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
                 pAdjustMethod = "BH", #矫正方式
@@ -46,7 +52,7 @@ head(ego,2)
 
 ##setReadable函数转换
 #ego_ALL <- enrichGO(gene = test1$ENTREZID,
-#                  universe = names(geneList),
+#                  universe = names(geneList),#可以不要基因集
 #                   OrgDb = org.Hs.eg.db,
 #                   ont = "all",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
 #                   pAdjustMethod = "BH",
