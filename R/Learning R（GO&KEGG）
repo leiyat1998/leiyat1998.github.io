@@ -27,7 +27,7 @@ test1=bitr(data_gene$name,fromType="SYMBOL",toType=c("ENSEMBL","ENTREZID"), OrgD
 head(test1,2)#查看前两列的转换
 
 
-#GO分析（部分）
+#GO分析（部分）####
 ##groupGO富集分析
 ggo <- groupGO(gene = test1$ENTREZID,OrgDb = org.Hs.eg.db, ont = "CC",level = 3,readable = TRUE)
 
@@ -36,34 +36,90 @@ ggo <- groupGO(gene = test1$ENTREZID,OrgDb = org.Hs.eg.db, ont = "CC",level = 3,
 ego <- enrichGO(gene = test1$ENTREZID,
                 universe = names(geneList),#背景基因集
                 OrgDb = org.Hs.eg.db,
-                ont = "ALL",
+                ont = "all",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
                 pAdjustMethod = "BH", #矫正方式
                 pvalueCutoff = 1, #P值会过滤掉很多，可以全部输出
                 qvalueCutoff = 1,
                 readable = TRUE) #Gene ID 转成gene Symbol ，易读
 head(ego,2)
 
+
 ##setReadable函数转换
-ego_mf <- enrichGO(gene = test1$ENTREZID,
-                   universe = names(geneList),
-                   OrgDb = org.Hs.eg.db,
-                   ont = "MF",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
-                   pAdjustMethod = "BH",
-                   pvalueCutoff = 1,
-                   qvalueCutoff = 1,
-                   readable = FALSE)
+#ego_ALL <- enrichGO(gene = test1$ENTREZID,
+#                  universe = names(geneList),
+#                   OrgDb = org.Hs.eg.db,
+#                   ont = "all",#Cellular component，CC 细胞成分,Biological process， BP 生物过程,Molecular function，MF 分子功能，ALL 三个都要
+#                   pAdjustMethod = "BH",
+#                   pvalueCutoff = 1,
+#                   qvalueCutoff = 1,
+#                   readable = FALSE)
 
 ##输出结果
+write.table(ego_ALL,file="GO.txt",sep="\t",quote=F,row.names = F) 
+
+
 ###点图
-dotplot(ego_mf,title="EnrichmentGO_MF_dot")#富集的数按大到小排序
+png(file = "GO_plot.png",width = 800,height = 1000)
+dotplot(ego_ALL,showCategory=10,split="ONTOLOGY")+
+  facet_grid(ONTOLOGY~.,scale='free')#富集的数按大到小排序
+dev.off()
+getwd()
 
 ###条形图
-go_p <- barplot(ego_mf, showCategory=20,title="EnrichmentGO_MF")
-save(go_p,file = "go.rdata")
-load("go.rdata")
-ggsave("go.png",width = 8,height = 8)
+png(file = "GO_barplot.png",width = 800,height = 1000)
+barplot(ego_ALL, showCategory=10,split="ONTOLOGY")+
+  facet_grid(ONTOLOGY~.,scale='free')
+dev.off()
 getwd()
 
 
-##查看具体通路和基因
-write.csv(ego@result,"key_gene_GO.csv",quote = F)
+##查看GO富集结果，具体通路和基因
+write.table(ego_ALL,file="GO.txt",sep="\t",quote=F,row.names = F) 
+
+
+###GO气泡图,需要有logFC数据
+library(ggdendro)
+library(gridExtra)
+library(GOplot)
+
+ego_result=read.table("GO.txt", header = T,sep="\t",check.names=F)
+go=data.frame(Category = ego_result$ONTOLOGY,
+              ID = ego_result$ID,
+              Term = ego_result$Description, 
+              Genes = gsub("/", ", ", ego_result$geneID), 
+              adj_pval = ego_result$p.adjust)
+
+###读取基因的logFC文件
+id.fc <- read.table("id.txt", header = T,sep="\t",check.names=F)
+genelist <- data.frame(ID = id.fc$gene, logFC = id.fc$logFC)
+row.names(genelist)=genelist[,1]
+circ <- circle_dat(go, genelist)
+
+###保存图片
+#绘制GO浮动气泡图
+png(file="GO气泡图.png",width = 10,height = 8)
+GOBubble(circ, labels = 3,table.legend =F)
+dev.off()
+
+
+###绘制GO圆圈图
+id.fc <- read.table("id.txt", header = T,sep="\t",check.names=F)
+genelist <- data.frame(ID = id.fc$gene, logFC = id.fc$logFC)
+row.names(genelist)=genelist[,1]
+circ <- circle_dat(go, genelist)
+
+png(file="GO圆圈图.png",width = 14,height = 6)
+GOCircle(circ,rad1=2.5,rad2=3.5,label.size=4,nsub=10)
+#rad1外圈的注释；nsub=10中10代表显示GO的数据，可修改
+dev.off()
+
+
+###绘制GO热图
+termNum = 20#限定term数目
+geneNum = nrow(genelist)#限定基因数目
+chord <- chord_dat(circ, genelist[1:geneNum,], go$Term[1:termNum])
+
+
+png(file="GO热图.png",width = 11,height = 5)
+GOHeat(chord, nlfc =1, fill.col = c('red', 'white', 'blue'))
+dev.off()
